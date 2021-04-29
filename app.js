@@ -10,9 +10,13 @@ const generateTeams = function() {
         return
     }
     peopleWithoutTeam = [...People]
-
+    console.log(peopleWithoutTeam)
     let personsPerTeam = Math.floor(peopleWithoutTeam.length/teams.length)
+    console.log('perteam', personsPerTeam)
     let personLeft = peopleWithoutTeam.length%teams.length
+
+    let nameContainer = document.getElementById('nameContainer')
+    nameContainer.innerHTML = ''
 
     while(peopleWithoutTeam.length > 0) {
         let randomNumber = Math.floor(Math.random()*peopleWithoutTeam.length)
@@ -23,21 +27,25 @@ const generateTeams = function() {
         newTeamMemberLi.innerHTML = `<p class="my-auto">${randomPerson}</p>
         <button type="button" class="btn btn-danger my-1 deleteButton">X</button>`
 
-        const index = peopleWithoutTeam.indexOf(randomNumber);
+        const index = peopleWithoutTeam.indexOf(randomPerson);
+        console.log(index)
         if (index > -1) {
-        peopleWithoutTeam.splice(index, 1);
+           peopleWithoutTeam.splice(index, 1);
         }
+        console.log(peopleWithoutTeam)
         for(team of teams) {
-            let participantCount = team.childNodes[1].childElementCount - 1
-            if(participantCount==personsPerTeam) {
-                personLeft -= 1
+            let participantCount = team.childNodes[1].childElementCount
+            if(participantCount<personsPerTeam){
                 team.childNodes[1].appendChild(newTeamMemberLi)
-            } else if(participantCount<personsPerTeam){
+                break
+            }else if(participantCount==personsPerTeam && personLeft>0) {
+                personLeft -= 1
                 team.childNodes[1].appendChild(newTeamMemberLi)
                 break
             }
         }
     }
+    addButtonListeners()
 }
 
 const addName = function(deleted) {
@@ -47,6 +55,9 @@ const addName = function(deleted) {
     } else {
         let input = document.getElementById('nameInput')
         name = input.value
+        if(name === '') {
+            return
+        }
         input.value = ''
         People.push(name)
     }
@@ -83,15 +94,16 @@ const addTeams = function() {
         col.innerHTML = teamCard
         teamSection.appendChild(col)
     }
-    addButtonListeners()
 }
 
 const addButtonListeners = function(){
     let deleteButtons = document.querySelectorAll('.deleteButton')
 
     for(button of deleteButtons) {
-        button.addEventListener('click', function(e) {addName(e.path[1].childNodes[1].innerText)
-        e.path[1].remove()})
+        button.removeEventListener('click', function(e){})
+        button.addEventListener('click', function(e) {
+            addName(e.path[1].childNodes[0].innerText)
+            e.path[1].remove()})
     }
 }
 
