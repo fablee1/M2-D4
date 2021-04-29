@@ -1,25 +1,27 @@
-html, body {
-    height: 100%;
-    overflow: hidden;
-}
-
 body {
-    background: radial-gradient(circle closest-corner at center 50%,rgb(65, 56, 56),black 100%) no-repeat;
+    /* background: radial-gradient(circle closest-corner at center 50%,rgb(65, 56, 56),black 100%) no-repeat; */
+    background-color: black;
     text-align: center;
+    min-height: 100vh;
+    height: 100%;
 }
 
 h1 {
     font-size: 3.5rem;
-    background: rgb(238,174,202);
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    font-family: 'Jua';
+    background: rgba(255, 255, 255, 0);
+    /* background: linear-gradient(5deg, rgb(255, 0, 0) 0%, rgba(242,0,0,1) 79%); */
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:#ffffff;
 }
 
 #heading img {
     width: 5.5rem;
+    filter: brightness(0) invert(1);
 }
 
 #heading > h1 {
@@ -34,14 +36,98 @@ hr {
     font-size: 60%;
 }
 
+.card {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid white;
+}
+
 h4 {
     color: white;
 }
 
 #teamCount {
     flex: 0 0;
+    color: white;
+    background-color: black;
 }
 
 #teamsInput {
     flex: 1;
 }
+
+.card-containers {
+    background-color: rgba(90, 129, 113, 0);
+}
+
+#nameContainer {
+    min-height: 50vh;
+    box-shadow: 0 0 10px white;
+}
+
+#teamContainer {
+    min-height: 50vh;
+    box-shadow: 0 0 10px white;
+}
+
+p {
+    margin-inline-start: 0.5em;
+    margin-inline-end: 0;
+}
+
+.btn {
+    padding: 0 0.5em;
+    margin-right: 0.25em;
+}
+
+.teamCards {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-danger {
+    color: #dc3545;
+    background-color: #00000000;
+    border-color: #dc3545;
+}
+
+.list-group-item {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-size: 0.8em;
+    border: 1px solid white;
+}
+
+#generateButton, #okButton {
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: white;
+}
+
+#generateButton:focus, #generateButton:hover, #okButton:focus, #okButton:hover {
+    box-shadow: 0 0 10px 1px white;
+}
+
+#addNameBtn:focus {
+    box-shadow: none;
+}
+
+input:focus, input:hover {
+    box-shadow: 0 0 10px 1px white!important;
+    border-color: white!important;
+}
+
+input:not(:placeholder-shown) {
+    color: white!important;
+    background-color:  #ffffff00!important;
+ }
+ 
+ 
+ input:placeholder-shown {
+    color: white;
+    background-color:  #ffffff00!important;
+ }
+
+ .input-group-text {
+     color: white;
+     background-color: rgba(0, 0, 0, 0);
+ }

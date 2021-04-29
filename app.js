@@ -1,8 +1,5 @@
 let People = []
-
 let peopleWithoutTeam
-
-let TeamParticipants = {}
 
 const generateTeams = function() {
     let teams = document.querySelectorAll('#teamContainer .card')
@@ -10,9 +7,8 @@ const generateTeams = function() {
         return
     }
     peopleWithoutTeam = [...People]
-    console.log(peopleWithoutTeam)
+
     let personsPerTeam = Math.floor(peopleWithoutTeam.length/teams.length)
-    console.log('perteam', personsPerTeam)
     let personLeft = peopleWithoutTeam.length%teams.length
 
     let nameContainer = document.getElementById('nameContainer')
@@ -23,16 +19,14 @@ const generateTeams = function() {
         let randomPerson = peopleWithoutTeam[randomNumber]
 
         let newTeamMemberLi = document.createElement('li')
-        newTeamMemberLi.classList.add('list-group-item', 'd-flex', 'p-0', 'justify-content-around', 'align-items-center') 
+        newTeamMemberLi.classList.add('list-group-item', 'd-flex', 'p-0', 'justify-content-between', 'align-items-center')
         newTeamMemberLi.innerHTML = `<p class="my-auto">${randomPerson}</p>
         <button type="button" class="btn btn-danger my-1 deleteButton">X</button>`
 
         const index = peopleWithoutTeam.indexOf(randomPerson);
-        console.log(index)
         if (index > -1) {
            peopleWithoutTeam.splice(index, 1);
         }
-        console.log(peopleWithoutTeam)
         for(team of teams) {
             let participantCount = team.childNodes[1].childElementCount
             if(participantCount<personsPerTeam){
@@ -63,7 +57,7 @@ const addName = function(deleted) {
     }
 
     let nameCard = document.createElement('div')
-    nameCard.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
+    nameCard.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3', 'py-1')
     nameCard.innerHTML = `<div class="card">
                             <div class="card-body p-1">
                             ${name}
@@ -83,8 +77,8 @@ const addTeams = function() {
 
     for(let i=0; i<teamCount; i++) {
         let col = document.createElement('div')
-        col.classList.add('col-6')
-        let teamCard = `<div class="card">
+        col.classList.add('col-6', 'py-1')
+        let teamCard = `<div class="card teamCards">
                             <div class="card-header">
                                 Team ${i+1}
                             </div>
@@ -107,3 +101,12 @@ const addButtonListeners = function(){
     }
 }
 
+window.onload = function() {
+    document.getElementById('nameInput').addEventListener("keydown", function(event) {
+        console.log(event.code)
+        if (event.code === 'Enter') {
+            event.preventDefault();
+            document.getElementById("addNameBtn").click();
+        }
+    });
+}
